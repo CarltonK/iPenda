@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iPenda/models/message_model.dart';
 import 'package:iPenda/models/user_model.dart';
 
@@ -14,16 +15,26 @@ class _ChatScreenState extends State<ChatScreen> {
   buildMessage(Message message, bool isMe) {
     final Container msg = Container(
       width: MediaQuery.of(context).size.width * 0.75,
-      padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
       margin: isMe
-          ? EdgeInsets.only(top: 8.0, bottom: 8.0, left: 80.0)
-          : EdgeInsets.only(top: 8.0, bottom: 8.0),
+          ? EdgeInsets.only(
+              top: 8.0,
+              bottom: 8.0,
+              left: 80.0,
+            )
+          : EdgeInsets.only(
+              top: 8.0,
+              bottom: 8.0,
+            ),
       decoration: BoxDecoration(
-        color: isMe ? Theme.of(context).accentColor : Color(0xFFFFEFEE),
+        color: isMe
+            ? Theme.of(context).accentColor.withOpacity(0.25)
+            : Colors.grey.withOpacity(0.25),
         borderRadius: isMe
             ? BorderRadius.only(
                 topLeft: Radius.circular(15.0),
-                bottomLeft: Radius.circular(15.0))
+                bottomLeft: Radius.circular(15.0),
+              )
             : BorderRadius.only(
                 topRight: Radius.circular(15.0),
                 bottomRight: Radius.circular(15.0),
@@ -34,7 +45,7 @@ class _ChatScreenState extends State<ChatScreen> {
         children: <Widget>[
           Text(
             message.time,
-            style: TextStyle(
+            style: GoogleFonts.quicksand(
               color: Colors.blueGrey,
               fontSize: 16.0,
               fontWeight: FontWeight.w600,
@@ -43,7 +54,7 @@ class _ChatScreenState extends State<ChatScreen> {
           SizedBox(height: 8.0),
           Text(
             message.text,
-            style: TextStyle(
+            style: GoogleFonts.quicksand(
               color: Colors.blueGrey,
               fontSize: 16.0,
               fontWeight: FontWeight.bold,
@@ -62,7 +73,6 @@ class _ChatScreenState extends State<ChatScreen> {
             icon: message.isLiked
                 ? Icon(Icons.favorite)
                 : Icon(Icons.favorite_border),
-            iconSize: 30.0,
             color: message.isLiked
                 ? Theme.of(context).primaryColor
                 : Colors.blueGrey,
@@ -74,7 +84,6 @@ class _ChatScreenState extends State<ChatScreen> {
   buildMessageComposer() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.0),
-      height: 60.0,
       color: Colors.white,
       child: Row(
         children: <Widget>[
@@ -102,24 +111,36 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
+  Widget _appBar() {
+    return AppBar(
+      title: Text(
+        widget.user.name,
+        style: Theme.of(context).textTheme.headline2,
+      ),
+      leading: IconButton(
+        icon: Icon(
+          Icons.arrow_back_ios,
+          color: Colors.black,
+        ),
+        onPressed: () => Navigator.of(context).pop(),
+      ),
+      backgroundColor: Colors.white,
+      elevation: 0.0,
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.more_horiz),
+          color: Colors.black,
+          onPressed: () {},
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(
-          widget.user.name,
-          style: Theme.of(context).textTheme.headline2,
-        ),
-        elevation: 0.0,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.more_horiz),
-            color: Colors.white,
-            onPressed: () {},
-          )
-        ],
-      ),
+      appBar: _appBar(),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Column(
@@ -138,14 +159,14 @@ class _ChatScreenState extends State<ChatScreen> {
                     topLeft: Radius.circular(30.0),
                   ),
                   child: ListView.builder(
-                      reverse: true,
-                      padding: EdgeInsets.only(top: 15.0),
-                      itemCount: messages.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final message = messages[index];
-                        final bool isMe = message.sender.id == currentUser.id;
-                        return buildMessage(message, isMe);
-                      }),
+                    padding: EdgeInsets.only(top: 15.0),
+                    itemCount: messages.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final message = messages[index];
+                      final bool isMe = message.sender.id == currentUser.id;
+                      return buildMessage(message, isMe);
+                    },
+                  ),
                 ),
               ),
             ),

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:iPenda/screens/home/message_page.dart';
 import 'package:iPenda/screens/home/profile_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -19,7 +18,6 @@ class _HomeBaseState extends State<HomeBase> {
       Container(
         height: _size.height,
         width: _size.width,
-        color: Colors.red,
       ),
       MessagePage(),
       ProfilePage()

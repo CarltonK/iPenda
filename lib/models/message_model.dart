@@ -190,7 +190,7 @@ List<Message> messages = [
   ),
   //Fifth
   Message(
-    sender: eric,
+    sender: currentUser,
     time: '10:35 PM',
     text: 'Eeeh. Ukibuy, nitashika',
     isLiked: false,
