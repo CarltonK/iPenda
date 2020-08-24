@@ -4,7 +4,6 @@ import 'package:iPenda/screens/authentication/login.dart';
 import 'package:iPenda/screens/authentication/registration.dart';
 import 'package:iPenda/utilities/styles.dart';
 
-
 class MainAuthentication extends StatefulWidget {
   @override
   _State createState() => _State();
@@ -28,21 +27,21 @@ class _State extends State<MainAuthentication> with TickerProviderStateMixin {
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         Container(
-            width: 200,
-            height: 40,
-            child: TabBar(
-              controller: controller,
-              labelPadding: EdgeInsets.all(8),
-              onTap: (value) {
-                setState(() {
-                  _selectedPage = value;
-                  _pageController.animateToPage(_selectedPage,
-                      duration: Duration(milliseconds: 200),
-                      curve: Curves.ease);
-                });
-              },
-              tabs: tabs,
-            ))
+          width: 200,
+          height: 40,
+          child: TabBar(
+            controller: controller,
+            labelPadding: EdgeInsets.all(8),
+            onTap: (value) {
+              setState(() {
+                _selectedPage = value;
+                _pageController.animateToPage(_selectedPage,
+                    duration: Duration(milliseconds: 200), curve: Curves.ease);
+              });
+            },
+            tabs: tabs,
+          ),
+        )
       ],
     );
   }
@@ -76,7 +75,7 @@ class _State extends State<MainAuthentication> with TickerProviderStateMixin {
         child: Container(
           height: size.height,
           width: size.width,
-          padding: EdgeInsets.fromLTRB(20, 40, 10, 0),
+          padding: EdgeInsets.fromLTRB(10, 40, 10, 0),
           child: Column(
             children: <Widget>[_appBar(), _pageSelection()],
           ),

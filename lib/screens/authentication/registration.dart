@@ -3,8 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iPenda/utilities/global/social_buttons.dart';
 import 'package:iPenda/utilities/styles.dart';
 
-
 class SignUpPage extends StatelessWidget {
+  final FocusNode focusEmail = FocusNode();
+  final FocusNode focusPassword = FocusNode();
+  final FocusNode focusConfirmPassword = FocusNode();
+
   Widget _introText() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,7 +27,7 @@ class SignUpPage extends StatelessWidget {
     );
   }
 
-    Widget _registerNameField() {
+  Widget _registerNameField(BuildContext context) {
     return TextFormField(
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.text,
@@ -34,11 +37,14 @@ class SignUpPage extends StatelessWidget {
         }
         return null;
       },
+      onFieldSubmitted: (value) {
+        FocusScope.of(context).requestFocus(focusEmail);
+      },
       decoration: InputDecoration(labelText: 'Name'),
     );
   }
 
-  Widget _registerEmailField() {
+  Widget _registerEmailField(BuildContext context) {
     return TextFormField(
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.emailAddress,
@@ -51,11 +57,15 @@ class SignUpPage extends StatelessWidget {
         }
         return null;
       },
+      focusNode: focusEmail,
+      onFieldSubmitted: (value) {
+        FocusScope.of(context).requestFocus(focusPassword);
+      },
       decoration: InputDecoration(labelText: 'Email address'),
     );
   }
 
-  Widget _registerPasswordField() {
+  Widget _registerPasswordField(BuildContext context) {
     return TextFormField(
       textInputAction: TextInputAction.done,
       keyboardType: TextInputType.text,
@@ -68,28 +78,55 @@ class SignUpPage extends StatelessWidget {
         }
         return null;
       },
+      focusNode: focusPassword,
+      onFieldSubmitted: (value) {
+        FocusScope.of(context).requestFocus(focusConfirmPassword);
+      },
       obscureText: true,
       decoration: InputDecoration(labelText: 'Password'),
     );
   }
 
+  Widget _registerConfirmPasswordField(BuildContext context) {
+    return TextFormField(
+      textInputAction: TextInputAction.done,
+      keyboardType: TextInputType.text,
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Please provide a password';
+        }
+        if (value.length < 7) {
+          return 'Password is too short';
+        }
+        return null;
+      },
+      focusNode: focusConfirmPassword,
+      obscureText: true,
+      onFieldSubmitted: (value) {
+        FocusScope.of(context).unfocus();
+      },
+      decoration: InputDecoration(labelText: 'Confirm Password'),
+    );
+  }
+
   Widget _registerButton() {
     return Positioned(
-        bottom: 20,
-        right: 15,
-        child: Container(
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12), color: Colors.pink[200]),
-          child: IconButton(
-            icon: Icon(
-              Icons.arrow_forward_ios,
-              color: Colors.white,
-            ),
-            onPressed: () => print('I want to register now'),
+      bottom: 20,
+      right: 15,
+      child: Container(
+        height: 50,
+        width: 50,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12), color: Colors.pink[200]),
+        child: IconButton(
+          icon: Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.white,
           ),
-        ));
+          onPressed: () => print('I want to register now'),
+        ),
+      ),
+    );
   }
 
   @override
@@ -101,56 +138,71 @@ class SignUpPage extends StatelessWidget {
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            height: size.height,
+            height: double.infinity,
             width: size.width,
             padding: EdgeInsets.symmetric(horizontal: 15),
             child: ListView(
               children: <Widget>[
                 SizedBox(
-                  height: 60,
+                  height: 30,
                 ),
                 _introText(),
                 SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
-                _registerNameField(),
+                _registerNameField(context),
                 SizedBox(
                   height: 20,
                 ),
-                _registerEmailField(),
+                _registerEmailField(context),
                 SizedBox(
                   height: 20,
                 ),
-                _registerPasswordField(),
+                _registerPasswordField(context),
                 SizedBox(
                   height: 20,
                 ),
-                _registerPasswordField(),
-                SocialButtons(),
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: 
-                  TextSpan(
-                    children: [
-                      TextSpan(text: 'By creating an account you agree to the ',
-                      style: GoogleFonts.quicksand(fontSize: 18, 
-                      fontWeight: FontWeight.w400, color: Colors.black)
-                      ),
-                      TextSpan(text: 'Terms ',
-                      style: GoogleFonts.quicksand(fontSize: 16, 
-                      fontWeight: FontWeight.w400, color: Colors.pink)
-                      ),
-                      TextSpan(text: 'and ',
-                      style: GoogleFonts.quicksand(fontSize: 16, 
-                      fontWeight: FontWeight.w400, color: Colors.black )
-                      ),    
-                      TextSpan(text: 'Privacy Policy',
-                      style: GoogleFonts.quicksand(fontSize: 16, 
-                      fontWeight: FontWeight.w400, color: Colors.pink)
-                      ),                                                              
-                    ]
-                  )
-                )
+                _registerConfirmPasswordField(context),
+                // SocialButtons(),
+                // RichText(
+                //   textAlign: TextAlign.center,
+                //   text: TextSpan(
+                //     children: [
+                //       TextSpan(
+                //         text: 'By creating an account you agree to the ',
+                //         style: GoogleFonts.quicksand(
+                //           fontSize: 18,
+                //           fontWeight: FontWeight.w400,
+                //           color: Colors.black,
+                //         ),
+                //       ),
+                //       TextSpan(
+                //         text: 'Terms ',
+                //         style: GoogleFonts.quicksand(
+                //           fontSize: 16,
+                //           fontWeight: FontWeight.w400,
+                //           color: Colors.pink,
+                //         ),
+                //       ),
+                //       TextSpan(
+                //         text: 'and ',
+                //         style: GoogleFonts.quicksand(
+                //           fontSize: 16,
+                //           fontWeight: FontWeight.w400,
+                //           color: Colors.black,
+                //         ),
+                //       ),
+                //       TextSpan(
+                //         text: 'Privacy Policy',
+                //         style: GoogleFonts.quicksand(
+                //           fontSize: 16,
+                //           fontWeight: FontWeight.w400,
+                //           color: Colors.pink,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),

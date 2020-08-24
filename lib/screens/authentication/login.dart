@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:iPenda/screens/authentication/reset_password.dart';
+import 'package:iPenda/screens/home/home_base.dart';
 import 'package:iPenda/utilities/global/pageTransitions.dart';
 import 'package:iPenda/utilities/global/social_buttons.dart';
 import 'package:iPenda/utilities/styles.dart';
-
 
 class LoginPage extends StatelessWidget {
   Widget _introText() {
@@ -12,7 +13,9 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _loginEmailField() {
+  final FocusNode focusPassword = FocusNode();
+
+  Widget _loginEmailField(BuildContext context) {
     return TextFormField(
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.emailAddress,
@@ -25,13 +28,15 @@ class LoginPage extends StatelessWidget {
         }
         return null;
       },
+      onFieldSubmitted: (value) {
+        FocusScope.of(context).requestFocus(focusPassword);
+      },
       decoration: InputDecoration(labelText: 'Email address'),
     );
   }
 
-  Widget _loginPasswordField() {
+  Widget _loginPasswordField(BuildContext context) {
     return TextFormField(
-      textInputAction: TextInputAction.done,
       keyboardType: TextInputType.text,
       validator: (value) {
         if (value.isEmpty) {
@@ -43,39 +48,56 @@ class LoginPage extends StatelessWidget {
         return null;
       },
       obscureText: true,
+      focusNode: focusPassword,
+      onFieldSubmitted: (value) {
+        FocusScope.of(context).unfocus();
+      },
       decoration: InputDecoration(labelText: 'Password'),
     );
   }
 
   Widget _loginButton(BuildContext context) {
     return Positioned(
-        bottom: 20,
-        right: 15,
-        child: Container(
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Colors.blueAccent[200].withOpacity(0.7)),
-          child: IconButton(
-            icon: Icon(
-              Icons.arrow_forward_ios,
-              color: Colors.white,
-            ),
-            onPressed: () => print('bye')
+      bottom: 20,
+      right: 15,
+      child: Container(
+        height: 50,
+        width: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.blueAccent[200].withOpacity(0.7),
+        ),
+        child: IconButton(
+          icon: Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.white,
           ),
-        ));
+          onPressed: () => Navigator.of(context).push(
+            SlideUpTransition(
+              page: HomeBase(),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _forgotPasswordButton(BuildContext context) {
     return Positioned(
-        bottom: 20,
-        child: FlatButton(
-            onPressed: () => print('hello'),
-            child: Text(
-              'Forgot Password ?',
-              style: normalOutlineBlack,
-            )));
+      bottom: 20,
+      child: FlatButton(
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => ResetPassword(),
+          ),
+        ),
+        child: Text(
+          'Forgot Password ?',
+          style: normalOutlineBlack,
+        ),
+      ),
+    );
   }
 
   @override
@@ -93,17 +115,17 @@ class LoginPage extends StatelessWidget {
             child: ListView(
               children: <Widget>[
                 SizedBox(
-                  height: 60,
+                  height: 30,
                 ),
                 _introText(),
                 SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
-                _loginEmailField(),
+                _loginEmailField(context),
                 SizedBox(
                   height: 20,
                 ),
-                _loginPasswordField(),
+                _loginPasswordField(context),
                 SocialButtons()
               ],
             ),

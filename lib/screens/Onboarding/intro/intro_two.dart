@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'package:google_fonts/google_fonts.dart';
 import 'package:iPenda/models/intro_model.dart';
 import 'package:iPenda/provider/offsetNotifier.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +8,6 @@ class IntroTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
@@ -34,12 +31,7 @@ class IntroTwo extends StatelessWidget {
                     child: child,
                   );
                 },
-                child: Container(
-                  height: 350,
-                  width: 350,
-                  decoration: BoxDecoration(
-                      color: Colors.white, shape: BoxShape.circle),
-                ),
+                child: Container(),
               ),
               Consumer<OffsetNotifier>(
                 builder: (context, value, child) {
@@ -56,7 +48,12 @@ class IntroTwo extends StatelessWidget {
                     child: Opacity(opacity: multiplier, child: child),
                   );
                 },
-                child: Image.asset(intros[1].image),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Image.asset(
+                    intros[1].image,
+                  ),
+                ),
               ),
             ],
           ),
@@ -83,10 +80,7 @@ class IntroTwo extends StatelessWidget {
             children: [
               Text(
                 intros[1].title,
-                style: GoogleFonts.quicksand(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                    letterSpacing: 2),
+                style: Theme.of(context).textTheme.headline1,
               ),
               SizedBox(
                 height: 8,
@@ -95,8 +89,7 @@ class IntroTwo extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   intros[1].subtitile,
-                  style: GoogleFonts.quicksand(
-                      fontSize: 16, fontWeight: FontWeight.w500),
+                  style: Theme.of(context).textTheme.bodyText1,
                   textAlign: TextAlign.center,
                 ),
               )

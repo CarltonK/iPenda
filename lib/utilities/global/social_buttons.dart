@@ -25,19 +25,19 @@ class SocialButtons extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 25.0),
       child: Row(
         children: <Widget>[
+          // _buildSocialBtn(
+          //   () {},
+          //   AssetImage(
+          //     'assets/logos/facebook.jpg',
+          //   ),
+          // ),
+          // SizedBox(
+          //   width: 10,
+          // ),
           _buildSocialBtn(
             () {},
             AssetImage(
-              'assets/facebook.jpg',
-            ),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          _buildSocialBtn(
-            () {},
-            AssetImage(
-              'assets/google.png',
+              'assets/logos/google.png',
             ),
           ),
         ],
