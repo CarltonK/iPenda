@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iPenda/screens/home/main_page.dart';
 import 'package:iPenda/screens/home/message_page.dart';
 import 'package:iPenda/screens/home/profile_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -11,16 +12,12 @@ class HomeBase extends StatefulWidget {
 
 class _HomeBaseState extends State<HomeBase> {
   PersistentTabController _controller;
-  Size _size;
 
   List<Widget> _buildScreens() {
     return [
-      Container(
-        height: _size.height,
-        width: _size.width,
-      ),
+      MainPage(),
       MessagePage(),
-      ProfilePage()
+      ProfilePage(),
     ];
   }
 
@@ -54,14 +51,7 @@ class _HomeBaseState extends State<HomeBase> {
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    _size = MediaQuery.of(context).size;
     return PersistentTabView(
       controller: _controller,
       screens: _buildScreens(),

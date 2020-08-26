@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iPenda/models/message_model.dart';
+import 'package:iPenda/screens/home/user_profile.dart';
+import 'package:iPenda/utilities/global/pageTransitions.dart';
 
 class NewMatches extends StatelessWidget {
   @override
@@ -41,7 +43,13 @@ class NewMatches extends StatelessWidget {
                 padding: EdgeInsets.only(left: 10.0),
                 itemBuilder: (context, index) {
                   return GestureDetector(
-                    onTap: () => print('Ola'),
+                    onTap: () => Navigator.of(context).push(
+                      SlideUpTransition(
+                        page: UserProfile(
+                          user: favorites[index],
+                        ),
+                      ),
+                    ),
                     child: Padding(
                       padding: EdgeInsets.all(10),
                       child: Column(

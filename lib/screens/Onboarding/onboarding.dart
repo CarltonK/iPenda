@@ -6,8 +6,10 @@ import 'package:iPenda/screens/authentication/main_authentication.dart';
 import 'package:iPenda/screens/onboarding/intro/intro_one.dart';
 import 'package:iPenda/screens/onboarding/intro/intro_three.dart';
 import 'package:iPenda/screens/onboarding/intro/intro_two.dart';
+import 'package:iPenda/utilities/global/pageTransitions.dart';
 import 'package:iPenda/widgets/pageIndicator.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Onboarding extends StatefulWidget {
   @override
@@ -22,6 +24,21 @@ class _OnboardingState extends State<Onboarding> {
   void initState() {
     super.initState();
     _pageController = PageController();
+    checkFirstSeen();
+  }
+
+  // Show Onboarding page only once
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _seen = (prefs.getBool('seen') ?? false);
+    if (!_seen) {
+      Navigator.of(context).pushReplacement(
+        SlideLeftTransition(
+          page: MainAuthentication(),
+        ),
+      );
+      await prefs.setBool('seen', true);
+    }
   }
 
   Widget _introHeader() {
