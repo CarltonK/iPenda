@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iPenda/provider/indexNotifier.dart';
@@ -5,6 +6,8 @@ import 'package:iPenda/screens/Onboarding/onboarding.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  Crashlytics.instance.enableInDevMode = false;
+  FlutterError.onError = Crashlytics.instance.recordFlutterError;
   runApp(MyApp());
 }
 

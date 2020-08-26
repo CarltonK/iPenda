@@ -16,6 +16,8 @@ dependencies:
   provider:   
   shared_preferences: ^0.5.10
   persistent_bottom_nav_bar: any
+  firebase_performance: ^0.3.2
+  firebase_crashlytics: ^0.1.4+1
 
 
 dev_dependencies:
