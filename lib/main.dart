@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iPenda/provider/indexNotifier.dart';
 import 'package:iPenda/screens/Onboarding/onboarding.dart';
+import 'package:iPenda/screens/pricing/pricing_base.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -42,6 +43,12 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
             fontSize: 17,
             color: Colors.black,
+            letterSpacing: 1,
+          ),
+          headline4: GoogleFonts.quicksand(
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+            color: Colors.white,
             letterSpacing: 1,
           ),
         ),

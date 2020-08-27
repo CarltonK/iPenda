@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iPenda/models/message_model.dart';
-import 'package:iPenda/screens/home/user_profile.dart';
+import 'package:iPenda/screens/home/profile/user_profile.dart';
 import 'package:iPenda/utilities/global/pageTransitions.dart';
 
 class NewMatches extends StatelessWidget {

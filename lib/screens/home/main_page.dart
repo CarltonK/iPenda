@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:iPenda/models/message_model.dart';
 import 'package:iPenda/models/user_model.dart';
@@ -67,6 +66,7 @@ class _MainPageState extends State<MainPage> {
     });
     return Container(
       padding: const EdgeInsets.only(top: 40.0, bottom: 20),
+      color: Colors.white,
       height: size.height,
       width: double.infinity,
       child: Column(
@@ -150,14 +150,42 @@ class _MainPageState extends State<MainPage> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 image: DecorationImage(
-                  image: NetworkImage(
-                    one.imageUrl,
-                  ),
-                  fit: BoxFit.cover,
-                ),
+                    image: NetworkImage(
+                      one.imageUrl,
+                    ),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      Colors.blueGrey[100],
+                      BlendMode.modulate,
+                    )),
                 borderRadius: BorderRadius.circular(16),
               ),
-            )
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Positioned(
+                    bottom: 20,
+                    left: 10,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${one.name}, 24',
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          'Kenyatta University',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),

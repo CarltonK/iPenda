@@ -31,37 +31,37 @@ final User steve = User(
     id: 1,
     name: 'Steve',
     imageUrl:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80');
+        'https://images.unsplash.com/photo-1561677843-39dee7a319ca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80');
 
 final User maggie = User(
     id: 2,
     name: 'Maggie',
     imageUrl:
-        'https://images.unsplash.com/photo-1534523600533-71d091d911d3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80');
+        'https://images.unsplash.com/photo-1531123414780-f74242c2b052?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80');
 
 final User caite = User(
     id: 3,
     name: 'Caite',
     imageUrl:
-        'https://images.unsplash.com/photo-1534523600533-71d091d911d3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80');
+        'https://images.unsplash.com/photo-1511945863317-d60e146e9016?ixlib=rb-1.2.1&auto=format&fit=crop&w=1037&q=80');
 
 final User cayo = User(
     id: 4,
     name: 'Cayo',
     imageUrl:
-        'https://images.unsplash.com/photo-1534523600533-71d091d911d3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80');
+        'https://images.unsplash.com/photo-1533030861215-66387403772f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80');
 
 final User eric = User(
     id: 5,
     name: 'Eric',
     imageUrl:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80');
+        'https://images.unsplash.com/photo-1524383880260-db51af30f5e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80');
 
 final User pishi = User(
     id: 6,
     name: 'Pishi',
     imageUrl:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80');
+        'https://images.unsplash.com/photo-1512785470245-e9c5bf9016d8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80');
 
 //Store favorite contacts in a list
 List<User> favorites = [eric, cayo, steve, caite, maggie, pishi];

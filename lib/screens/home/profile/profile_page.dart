@@ -1,5 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iPenda/models/user_model.dart';
+import 'package:iPenda/screens/home/profile/user_profile.dart';
+import 'package:iPenda/screens/home/settings/settings_page.dart';
+import 'package:iPenda/screens/pricing/pricing_base.dart';
 import 'package:iPenda/utilities/global/pageTransitions.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -31,8 +36,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 borderRadius: BorderRadius.circular(12),
                 gradient: LinearGradient(
                   colors: [
-                    Colors.pink.withOpacity(0.8),
-                    Colors.red[600],
+                    Colors.grey,
+                    Colors.grey,
                   ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -72,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Column(
                     children: [
@@ -80,7 +85,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         radius: 40,
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 2,
                       ),
                       Text(
                         'John Doe',
@@ -92,6 +97,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 30,
                   ),
                   Column(
                     children: [
@@ -112,8 +120,13 @@ class _ProfilePageState extends State<ProfilePage> {
                       )
                     ],
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () => Navigator.of(context).push(
+                      SlideLeftTransition(page: PricingBase()),
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                       side: BorderSide(
@@ -165,7 +178,21 @@ class _ProfilePageState extends State<ProfilePage> {
           singleOptionTile(
             Icons.person,
             'My Profile',
-            null,
+            () {
+              final User currentUser = User(
+                  id: 0,
+                  name: 'Mark',
+                  imageUrl:
+                      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80');
+
+              Navigator.of(context).push(
+                SlideLeftTransition(
+                  page: UserProfile(
+                    user: currentUser,
+                  ),
+                ),
+              );
+            },
           ),
           singleOptionTile(
             Icons.album,
@@ -175,12 +202,9 @@ class _ProfilePageState extends State<ProfilePage> {
           singleOptionTile(
             Icons.settings,
             'Settings',
-            null,
-          ),
-          singleOptionTile(
-            Icons.people,
-            'Contact Support',
-            null,
+            () => Navigator.of(context).push(
+              SlideLeftTransition(page: SettingsPage()),
+            ),
           ),
         ],
       ),
@@ -190,8 +214,9 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     _size = MediaQuery.of(context).size;
-    return Padding(
+    return Container(
       padding: const EdgeInsets.symmetric(vertical: 40.0),
+      color: Colors.white,
       child: Column(
         children: [
           profileHeader(),
